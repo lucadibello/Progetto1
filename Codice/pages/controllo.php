@@ -10,8 +10,6 @@
     //DATA VALIDATION WRONG FIELDS
     $errors = array();
 
-    echo "<script>alert('start');</script>";
-
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         if(allSet()){
             $request_valid = true;
@@ -28,25 +26,18 @@
             $numero_telefono = test_input($_POST["phone"]);
             $work = test_input($_POST["work"]);
             $hobby = test_input($_POST["hobby"]);
-            echo "<script>alert('all set');</script>";
 
             $result = validate_all();
             if(is_array($result)){
                 $data_valid = false;
-                echo "<script>alert('some errors');</script>";
             }
             else{
                 $data_valid = true;
-                setup_cookies_reconfigure();
-                echo "<script>alert('no errors');</script>";
+                create_restore_session();
             }
-        }
-        else{
-            echo "<script>alert('not set');</script>";
         }
     }
     else{
-        echo "<script>alert('not post');</script>";
         header("Location: register.php");
     }
 
@@ -115,40 +106,27 @@
         }
     }
 
-    function setup_cookies_reconfigure(){
+    function create_restore_session(){
         global $nome,$cognome,$data_nascita,$sesso,$email,$citta,$cap,$via,$numero_civico,$numero_telefono,$work,$hobby;
+        session_start();
 
-        $life_time = time() + 60;
-        setcookie("restore",true,$life_time, "/");
-        setcookie("first_name",$nome,$life_time, "/");
-        setcookie("last_name",rawurlencode($cognome),$life_time, "/");
-        setcookie("data_nascita",$data_nascita,$life_time, "/");
-        setcookie("sesso",$sesso,$life_time, "/");
-        setcookie("email",$email,$life_time, "/");
-        setcookie("citta",$citta,$life_time, "/");
-        setcookie("cap",$cap,$life_time, "/");
-        setcookie("via",$via,$life_time, "/");
-        setcookie("numero_civico",$numero_civico,$life_time, "/");
-        setcookie("phone",$numero_telefono,$life_time, "/");
-        setcookie("work",$work,$life_time, "/");
-        setcookie("hobby",$hobby,$life_time, "/");
+        $_SESSION["restore"] = true;
+        $_SESSION["nome"] = urlencode($nome);
+        $_SESSION["cognome"] = urlencode($cognome);
+        $_SESSION["data_nascita"] = urlencode($data_nascita);
+        $_SESSION["sesso"] = urlencode($sesso);
+        $_SESSION["email"] = urlencode($email);
+        $_SESSION["citta"] = urlencode($citta);
+        $_SESSION["cap"] = urlencode($cap);
+        $_SESSION["via"] = urlencode($via);
+        $_SESSION["numero_civico"] = urlencode($numero_civico);
+        $_SESSION["numero_telefono"] = urlencode($numero_telefono);
+        $_SESSION["work"] = urlencode($work);
+        $_SESSION["hobby"] = urlencode($hobby);
     }
 
-    function delete_cookies(){
-        if(isset($_COOKIE["restore"])) unset($_COOKIE["restore"]);
-
-        if(isset($_COOKIE["first_name"])) unset($_COOKIE["first_name"]);
-        if(isset($_COOKIE["last_name"])) unset($_COOKIE["last_name"]);
-        if(isset($_COOKIE["data_nascita"])) unset($_COOKIE["data_nascita"]);
-        if(isset($_COOKIE["sesso"])) unset($_COOKIE["sesso"]);
-        if(isset($_COOKIE["email"])) unset($_COOKIE["email"]); 
-        if(isset($_COOKIE["citta"])) unset($_COOKIE["citta"]);
-        if(isset($_COOKIE["cap"])) unset($_COOKIE["cap"]);
-        if(isset($_COOKIE["via"])) unset($_COOKIE["via"]);
-        if(isset($_COOKIE["numero_civico"])) unset($_COOKIE["numero_civico"]);
-        if(isset($_COOKIE["phone"])) unset($_COOKIE["phone"]);
-        if(isset($_COOKIE["work"])) unset($_COOKIE["work"]);
-        if(isset($_COOKIE["hobby"])) unset($_COOKIE["hobby"]);
+    function close_restore_session(){
+        isset($_SESSION["restore"]) ? session_destroy() : print("not setted");
     }
 ?>
 
@@ -231,7 +209,10 @@
                     <button class="btn waves-effect waves-light teal" style="background-color:rgb(211, 21, 21) !important; margin-right: 10px;">Correggi</td>
                 </form>
                 
-                <button class="btn waves-effect waves-light teal">Avanti</td>
+                <form method="post" action="../php/register_user.php">
+                    <input type="hidden" name="register" value="true">
+                    <button class="btn waves-effect waves-light teal">Avanti</td>
+                </form>
             </div>
         <?php elseif($request_valid && !$data_valid):?>
         <h3>Data not valid</h3>

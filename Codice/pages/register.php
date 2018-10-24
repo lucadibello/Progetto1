@@ -1,33 +1,27 @@
 <?php
+    session_start();
+    echo "test xdebug";
     require("../php/validator.php");
     $nome=$cognome=$data_nascita=$sesso=$email=$citta=$cap=$via=$numero_civico=$numero_telefono=$work=$hobby = "";
     
     //REQUEST FROM controllo.php FOR RESTORING FORM DATA
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-        echo "<script>alert('post request detected');</script>";
         if(isset($_POST["restore"])){
             //RESTORE REQUEST APPROVED
-            echo "<script>alert('restore request approved');</script>";
-            if(isset($_COOKIE["restore"])){
-                //RESTORE COOKIES APPROVED
-                echo "<script>alert('entered restore-data mode');</script>";
-                $nome = $_COOKIE["first_name"];
-                $cognome = rawurldecode($_COOKIE["last_name"]);
-                $data_nascita =  $_COOKIE["data_nascita"];
-                $sesso =  $_COOKIE["sesso"];
-                $email =  $_COOKIE["email"];
-                $citta =  $_COOKIE["citta"];
-                $cap =  $_COOKIE["cap"];
-                $via =  $_COOKIE["via"];
-                $numero_civico =  $_COOKIE["numero_civico"];
-                $numero_telefono =  $_COOKIE["phone"];
-                $work =  $_COOKIE["work"];
-                $hobby =  $_COOKIE["hobby"];
-                
-                //VALIDATE FOR CONFORMITY
-            }
-            else{
-                echo "<script>alert('no restore flag');</script>";
+            if(isset($_SESSION["restore"])){
+                //RESTORE SESSIONS APPROVED
+                $nome = urldecode($_SESSION["nome"]);
+                $cognome = urldecode($_SESSION["cognome"]);
+                $data_nascita =  urldecode($_SESSION["data_nascita"]);
+                $sesso =  urldecode($_SESSION["sesso"]);
+                $email =  urldecode($_SESSION["email"]);
+                $citta =  urldecode($_SESSION["citta"]);
+                $cap =  urldecode($_SESSION["cap"]);
+                $via =  urldecode($_SESSION["via"]);
+                $numero_civico =  urldecode($_SESSION["numero_civico"]);
+                $numero_telefono =  urldecode($_SESSION["numero_telefono"]);
+                $work =  urldecode($_SESSION["work"]);
+                $hobby =  urldecode($_SESSION["hobby"]);
             }
         }
     }
@@ -38,16 +32,6 @@
         $data = htmlspecialchars($data);
         
         return $data;
-    }
-
-    function check_restore_cookies(){
-        global $_COOKIE;
-        if(isset($_COOKIE["first_name"]) && isset($_COOKIE["last_name"]) && isset($_COOKIE["data_nascita"]) && isset($_COOKIE["sesso"])
-        && isset($_COOKIE["email"]) && isset($_COOKIE["citta"]) && isset($_COOKIE["cap"]) && isset($_COOKIE["via"]) && isset($_COOKIE["numero_civico"])
-        && isset($_COOKIE["phone"]) && isset($_COOKIE["work"]) && isset($_COOKIE["hobby"])){
-            return true;
-        }
-        return false;
     }
 ?>
 
@@ -74,11 +58,11 @@
                             <div class="row">
                                 <div class="input-field col s6">
                                     <i class="material-icons prefix">person</i>
-                                    <input id="first_name" name="first_name" type="text" class="validate" data-length="50" value=<?php echo $nome?>>
+                                    <input id="first_name" name="first_name" type="text" class="validate" value="<?php echo $nome?>">
                                     <label for="first_name">Nome</label>
                                 </div>
                                 <div class="input-field col s6">
-                                    <input id="last_name" name="last_name" type="text" class="validate" data-length="50" value=<?php echo $cognome?>>
+                                    <input id="last_name" name="last_name" type="text" class="validate" value="<?php echo $cognome?>">
                                     <label for="last_name">Cognome</label>
                                 </div>
                             </div>
@@ -86,7 +70,7 @@
                             <div class="row">
                                 <div class="input-field col s6">
                                     <i class="material-icons prefix">perm_contact_calendar</i>
-                                    <input id="data_nascita" type="date" name="data_nascita" value=<?php echo $data_nascita?>>
+                                    <input id="data_nascita" type="date" name="data_nascita" value="<?php echo $data_nascita?>"">
                                     <label for="data_nascita">Data di nascita</label>
                                 </div>
                                 <div class="input-field col s6">
@@ -105,7 +89,7 @@
                                 </div>
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">contact_mail</i>
-                                    <input id="email" type="email" class="validate" name="email" value=<?php echo $email?>>
+                                    <input id="email" type="email" class="validate" name="email" value="<?php echo $email?>">
                                     <label for="email">Email</label>
                                 </div>
                             </div>
@@ -114,11 +98,11 @@
                             <div class="row">
                                 <div class="input-field col s6">
                                     <i class="material-icons prefix">location_city</i>
-                                    <input id="citta" type="text" class="validate" name="citta" value=<?php echo $citta?>>
+                                    <input id="citta" type="text" class="validate" name="citta" value="<?php echo $citta?>">
                                     <label for="citta">Citta</label>
                                 </div>
                                 <div class="input-field col s6">
-                                    <input id="cap" type="number" class="validate" min=1 name="cap" value=<?php echo $cap?>>
+                                    <input id="cap" type="number" class="validate" min=1 name="cap" value="<?php echo $cap?>">
                                     <label for="cap">CAP</label>
                                 </div>
                             </div>
@@ -127,11 +111,11 @@
                             <div class="row">
                                 <div class="input-field col s6">
                                     <i class="material-icons prefix">location_on</i>
-                                    <input id="via" type="text" class="validate" name="via" value=<?php echo $via?>>
+                                    <input id="via" type="text" class="validate" name="via" value="<?php echo $via?>">
                                     <label for="via">Via</label>
                                 </div>
                                 <div class="input-field col s6">
-                                    <input id="numero_civico" type="text" class="validate" name="numero_civico" value=<?php echo $numero_civico?>>
+                                    <input id="numero_civico" type="text" class="validate" name="numero_civico" value="<?php echo $numero_civico?>">
                                     <label for="numero_civico">Numero civico</label>
                                 </div>
                             </div>
@@ -139,7 +123,7 @@
                             <div class="row">
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">phone</i>
-                                    <input id="phone" type="text" class="validate" name="phone" value=<?php echo $numero_telefono?>>
+                                    <input id="phone" type="text" class="validate" name="phone" value="<?php echo $numero_telefono?>">
                                     <label for="phone">Telefono</label>
                                 </div>
                             </div>
@@ -147,7 +131,7 @@
                             <div class="row">
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">work</i>
-                                    <input id="professione" type="text" class="validate" name="work" value=<?php echo $work?>>
+                                    <input id="professione" type="text" class="validate" name="work" value="<?php echo $work?>">
                                     <label for="professione">Professione</label>
                                 </div>
                             </div>
