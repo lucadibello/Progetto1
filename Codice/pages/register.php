@@ -3,6 +3,12 @@
     echo "test xdebug";
     require("../php/validator.php");
     $nome=$cognome=$data_nascita=$sesso=$email=$citta=$cap=$via=$numero_civico=$numero_telefono=$work=$hobby = "";
+
+    if(isset($_SESSION["registered"])){
+        if($_SESSION["registered"] == true){
+            header("Location: riassunto.php");
+        }
+    }
     
     //REQUEST FROM controllo.php FOR RESTORING FORM DATA
     if($_SERVER["REQUEST_METHOD"] == "POST"){

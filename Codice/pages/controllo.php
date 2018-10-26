@@ -41,7 +41,6 @@
         header("Location: register.php");
     }
 
-
     function test_input($data) {
         $data = trim($data);
         $data = stripslashes($data);
@@ -227,10 +226,5 @@
     <!--JavaScript at end of body for optimized loading-->
     <script type="text/javascript" src="../js/materialize.min.js"></script>
     <script src="../vendor/jquery/jquery.min.js"></script>
-
-    <script>
-    //CORREGGI BUTTON
-    //CREA UN FORM INVISIBILE ED INVIA I DATI ALLA PAGINA PRECEDENTE
-    </script>
 </body>
 </html>

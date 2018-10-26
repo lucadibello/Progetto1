@@ -67,14 +67,14 @@ function validate_numeroCivico($civico){
 }
 
 function validate_work($text){
-    if(strlen($text) > $GLOBALS["global_length_min"] && strlen($text) < $GLOBALS["global_length_max"]){
+    if(strlen($text) < $GLOBALS["global_length_max"]){
         return true;
     }
     return false;
 }
 
 function validate_hobby($text){
-    if(strlen($text) > $GLOBALS["global_length_min"] && strlen($text) < $GLOBALS["global_length_max"]){
+    if(strlen($text) < $GLOBALS["global_length_max"]){
         return true;
     }
     return false;

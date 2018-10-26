@@ -2,18 +2,8 @@
 
 class CSVisualizer
 {
-    private $csv_file;
-    private $csv_delimiter; 
-
-    public function __construct($csv_path,$delimiter=','){
-        $this->csv_file = $csv_path;
-        $this->csv_delimiter = $delimiter;
-    }
-
-    public function csv_to_array()
+    public function csv_to_array($csv_file,$csv_delimiter=';')
     {
-        $csv_file = $this->csv_file;
-        $csv_delimiter = $this->csv_delimiter;
         if(!file_exists($csv_file) || !is_readable($csv_file))
             return false;
 
@@ -32,25 +22,23 @@ class CSVisualizer
         }
         return $data;
     }
-
-    public function add_new_line(array $data){
-        $csv_file = $this->csv_file;
-        $csv_delimiter = $this->csv_delimiter;
-
-        echo file_exists($csv_file);
-        echo is_readable($csv_file);
-        
-        if(file_exists($csv_file) == false || is_readable($csv_file) == false){
-            return false;
-        }
-
+    public function csv_build_string(array $data){
         $text = "";
         for($i = 0; $i < count($data);$i++){
-            if($i == 0) $text .= $data[i];
-            else $text .= ",".$data[i];
+            if($i == 0) $text .= urldecode($data[$i]);
+            else $text .= ";".urldecode($data[$i]);
         }
 
-        file_put_contents($csv_file,$text);
+        $text .= "\n";
+        return $text;
+    }
+
+    public function get_current_day_filename(){
+        return "Registrazioni_". date('Y-m-d') . ".csv";
+    }
+
+    public function add_new_line($csv_file,array $data,$csv_delimiter=','){
+        file_put_contents($csv_file,$this->csv_build_string($data),FILE_APPEND);
         return true;
     }
 }

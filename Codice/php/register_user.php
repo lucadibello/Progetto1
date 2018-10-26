@@ -1,20 +1,26 @@
 <?php
+    session_start();
     require_once("../php/CSVisualizer.php");
-    $csv_util = new CSVisualizer("data/users.php");
+    $csv_util = new CSVisualizer();
     
-    add_user(array(1,2,3,4,5,6,7,8,9,10,11,12));
-    
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        if(isset($_POST["register"])){
+            $values = array_values($_SESSION);
+            $data = array_splice($values,1);
+            add_user($data);
+            $_SESSION["registered"] = true;
+            header("Location: ../pages/riassunto.php");
+        }
+    }
+
     function add_user(array $data){
         global $csv_util;
-        if(count($data) == 12){
-            if($csv_util->add_new_line($data)){
-                echo "added new line correctly";
-                var_dump($csv_util->csv_to_array());
-                return true;
-            }
-        }
-        else{
-            return false;
-        }
+
+        //ADD DATA IN Registrazioni_Tutte.csv
+        $csv_util->add_new_line('data/Registrazioni_tutte.csv',$data);
+
+        //CREATE TODAY'S FILE IF NOT EXISTS AND APPEND TEXT
+        $file_name = "data/".$csv_util->get_current_day_filename();
+        $csv_util->add_new_line($file_name,$data);
     }
 ?>
