@@ -6,38 +6,52 @@ class validator {
 
     nome(text, lengthMin, lengthMax) {
         if (text.length > lengthMin && text.length < lengthMax) {
-            var onlyLetters = /^[a-z]+$/i;
-            return onlyLetters.test(text);
+            var allChars = /^\s*([A-Za-z\u00C0-\u017F ]{1,}([\.,]|[-']|))*$/i;
+            return allChars.test(text);
         }
         return false;
     }
 
     cognome(text, lengthMin, lengthMax) {
         if (text.length > lengthMin && text.length < lengthMax) {
-            var onlyLetters = /^[a-z ]+$/i;
-            return onlyLetters.test(text);
+            var allChars = /^\s*([A-Za-z\u00C0-\u017F ]{1,}([\.,]|[-']|))*$/i;
+            return allChars.test(text);
         }
         return false;
     }
 
     via(text, lengthMin, lengthMax) {
         if (text.length > lengthMin && text.length < lengthMax) {
-            var onlyLetters = /^[a-z ]+$/i;
-            return onlyLetters.test(text);
+            var allChars = /^\s*([A-Za-z\u00C0-\u017F ]{1,}([\.,]|[-']|))*$/i;
+            return allChars.test(text);
         }
         return false;
     }
 
     dataNascita(date) {
-        var dateReg =/^\d{4}[-]\d{2}[-]\d{2}$/;
+        var dateReg = /^\d{4}[-]\d{2}[-]\d{2}$/;
         if (date.length > 0) {
-            return dateReg.test(date);
+            if (dateReg.test(date)) {
+                //VALID FORMAT
+                //CHECK DATA CONFORMITY
+                var nowDate = new Date();
+                var dateObj = new Date(date);
+                if (dateObj.getFullYear() < nowDate.getFullYear() && dateObj.getFullYear() > (nowDate.getFullYear() - 120)) {
+                    return true;
+                } else {
+                    //BORN AFTER CURRENT YEAR OR BORN MORE THEN 120 YEARS AGO
+                    return false;
+                }
+            } else {
+                //INVALID FORMAT
+                return false;
+            }
         }
         return false;
     }
 
     email(email) {
-        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        var re = /^(([^<>()\[\]\\.,:\s@"]+(\.[^<>()\[\]\\.,:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (email.length > 0) {
             return re.test(email);
         }
@@ -57,8 +71,8 @@ class validator {
         return re.test(cap);
     }
 
-    phone(number){
-        if(number.length > 0){
+    phone(number) {
+        if (number.length > 0) {
             var re = /^(\+|00)+[0-9]{11}$/;
             return re.test(number);
         }
@@ -66,7 +80,7 @@ class validator {
     }
 
     numeroCivico(numeroCivico) {
-        var re = /^[0-9]+((|[a-zA-Z]){1})$/;
+        var re = /^[0-9]{1,3}(|[a-zA-Z]){1}$/;
         if (numeroCivico.length > 0) {
             return re.test(numeroCivico);
         }
