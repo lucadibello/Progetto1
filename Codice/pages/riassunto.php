@@ -61,42 +61,58 @@
 </head>
 
 <body>
-        <div class="container white z-depth-2" >
-        <table class="responsive-table highlight">
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Cognome</th>
-                        <th>Data di nascita</th>
-                        <th>Sesso</th>
-                        <th>Email</th>
-                        <th>Città</th>
-                        <th>CAP</th>
-                        <th>Via</th>
-                        <th>Numero Civico</th>
-                        <th>Numero di telefono</th>
-                        <th>Professione</th>
-                        <th>Hobby</th>
-                    </tr>
-                </thead>
+        <header>
+            <h1 class="flow-text center-align" id="riassunto-header">Utenti registrati oggi</h1>
+        </header>
+        
+        <main>
+            <div class="container white z-depth-2" >
+            <table class="responsive-table highlight">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Cognome</th>
+                            <th>Data di nascita</th>
+                            <th>Sesso</th>
+                            <th>Email</th>
+                            <th>Città</th>
+                            <th>CAP</th>
+                            <th>Via</th>
+                            <th>Numero Civico</th>
+                            <th>Numero di telefono</th>
+                            <th>Professione</th>
+                            <th>Hobby</th>
+                        </tr>
+                    </thead>
 
-                <tbody>
-                    <?php
-                        echo buildTable();
-                    ?>
-                </tbody>
-            </table>
+                    <tbody>
+                        <?php
+                            echo buildTable();
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+            
+        </main>
 
-            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>">
-                <input type="hidden" name="logout" value="true">
-                <center>
-                    <button class="btn waves-effect waves-light teal" id="logout-button" style="background-color:rgb(211, 21, 21) !important;">Esegui il logout</td>
-                </center>
-            </form>
-        </div>
+        <footer class="page-footer" style="background-color: white !important;">
+            <center>
+                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" style="margin: 30px;">
+                    <input type="hidden" name="logout" value="true">
+                    <button class="btn waves-effect waves-light teal" id="logout-button" style="background-color:rgb(211, 21, 21)">Esegui il logout</td>
+                </form>
+            </center>
+        </footer>
     <!--JavaScript at end of body for optimized loading-->
     <script type="text/javascript" src="../js/materialize.min.js"></script>
     <script src="../vendor/jquery/jquery.min.js"></script>
+
+    <script>
+        function scrollToBottom(){
+            window.scrollTo(0,document.body.scrollHeight);
+            console.log("[INFO] Scrolled to bottom");
+        }
+    </script>
 </body>
 </html>
 

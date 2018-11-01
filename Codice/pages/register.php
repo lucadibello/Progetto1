@@ -1,6 +1,5 @@
 <?php
     session_start();
-    echo "test xdebug";
     require("../php/validator.php");
     $nome=$cognome=$data_nascita=$sesso=$email=$citta=$cap=$via=$numero_civico=$numero_telefono=$work=$hobby = "";
 
@@ -130,7 +129,7 @@
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">phone</i>
                                     <input id="phone" type="text" class="validate" name="phone" value="<?php echo $numero_telefono?>">
-                                    <label for="phone">Telefono</label>
+                                    <label for="phone">Numero di cellulare</label>
                                 </div>
                             </div>
 
@@ -151,7 +150,7 @@
                                 </div>
                             <center>
                                 <div class="row"><span style="color: red !important;" id="errorMessage"></span></div>
-                                <div class="btn waves-effect waves-light teal" type="submit" name="action" style="background-color:rgb(211, 21, 21) !important">Cancella</div>
+                                <div class="btn waves-effect waves-light teal" type="submit" id="cancellaButton" name="action" style="background-color:rgb(211, 21, 21) !important">Cancella</div>
                                 <div class="btn waves-effect waves-light teal"  type="submit" id="avantiButton" name="action" value="register">Avanti</div>
                             </center>
                         </div>
@@ -180,6 +179,20 @@
                 $("#errorMessage").text("There are one or more errors in your inputs, please fix them for continue the registration process").show().fadeIn(2000,function(){
                     $("#errorMessage").fadeOut(5000);
                 });
+
+                var emptyHobby = $("#hobby").val().length == 0;
+                var emptyProf = $("#professione").val().length == 0;
+
+                //MOSTRATI SOLO SE CI SONO ERRORI
+                if(emptyHobby){
+                    var toastHTML = '<span style="color:orange;font-weight:bold;">Warning: </span><span> Campo Hobby</span>';
+                    M.toast({html: toastHTML});
+                }
+
+                if(emptyProf){
+                    var toastHTML = '<span style="color:orange;font-weight:bold;">Warning: </span><span> Campo Professione</span>';
+                    M.toast({html: toastHTML});
+                }
             }
         });
     });
