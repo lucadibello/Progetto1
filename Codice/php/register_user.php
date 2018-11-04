@@ -38,7 +38,7 @@
     function add_user(array $data){
         global $csv_util;
         //----------------------------------------------------File globale
-        $file_name_all = "data/Registrazioni_tutte.csv";
+        $file_name_all = "../registrazioni/Registrazioni_tutte.csv";
 
         /*
         * Inserisco i dati in un altra variabile prima del richiamo del metodo 'array_slice'
@@ -60,7 +60,7 @@
         $csv_util->add_new_line($file_name_all,$data);
 
         //----------------------------------------------------File odierno 
-        $file_name_day = "data/".$csv_util->get_current_day_filename();
+        $file_name_day = "../registrazioni/".$csv_util->get_current_day_filename();
 
         //Se il file non esiste, lo crea, aggiunge l'header e dopo aggiunge i dati
         if(!file_exists($file_name_day)){

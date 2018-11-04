@@ -73,7 +73,7 @@ class validator {
 
     phone(number) {
         if (number.length > 0) {
-            var re = /^(\+|00)+[0-9]{11}$/;
+            var re = /^(\+|00)+[0-9]{11,13}$/;
             return re.test(number);
         }
         return false

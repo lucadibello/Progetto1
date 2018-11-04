@@ -1,4 +1,5 @@
 <?php
+    session_start();
     //Questa pagina utilizza un 'require' perchè i metodi di 'validator.php' sono necessari per il corretto funzionamento della pagina
     require_once("../php/validator.php");
 
@@ -48,9 +49,13 @@
             */   
             if(is_array($result)){
                 $data_valid = false;
+                $_SESSION["errors"] = $result;
             }
             else{
                 $data_valid = true;
+                
+                if(isset($_SESSION["errors"])) unset($_SESSION["errors"]);
+                
                 create_restore_session();
             }
         }
@@ -138,7 +143,6 @@
      */
     function create_restore_session(){
         global $nome,$cognome,$data_nascita,$sesso,$email,$citta,$cap,$via,$numero_civico,$numero_telefono,$work,$hobby;
-        session_start();
 
         $_SESSION["restore"] = true;
         $_SESSION["nome"] = urlencode($nome);
@@ -183,7 +187,7 @@
 </head>
 
 <body>
-    <div class="container white z-depth-2">
+    <div class="col-sm-11" style="padding:10px;">
         <div id="register" class="col s12" style="padding: 10px;">
         <?php if($request_valid && $data_valid):?>
             <table class="responsive-table highlight">
@@ -253,13 +257,13 @@
                     <button class="btn waves-effect waves-light teal">Avanti</td>
                 </form>
             </div>
-        <?php elseif($request_valid && !$data_valid):?>
-        <h3>Data not valid</h3>
-        <?php elseif(!$request_valid):?>
-        <h3>Not valid request</h3>
-        <?php else:?>
-        <h3>Redirect..</h3>
-        <?php endif;?>
+        <?php 
+            elseif($request_valid && !$data_valid):
+                Header("Location: register.php?error");
+            else:
+                Header("Location: register.php");
+            endif;
+        ?>
             
         </div>
     </div>

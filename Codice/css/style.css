@@ -1,22 +1,25 @@
-/* INDEX.HTML STYLE */
+/*REGISTER.PHP STYLE*/
+.required-field {
+    color: red !important;
+}
+
 /*RIASSUNTO.PHP STYLE*/
-#logout-button:hover{
+#logout-button:hover {
     animation-delay: 0.3s;
     background-color: rebeccapurple !important;
 }
 
-#header-riassunto{
+#header-riassunto {
     font-size: 150px;
     text-align: center;
 }
 
-body{
+body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
 }
 
-main{
+main {
     flex: 1 0 auto;
 }
-

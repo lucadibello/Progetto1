@@ -1,0 +1,9 @@
+reg_date;first_name;last_name;data_nascita;sesso;email;citta;cap;via;numero_civico;numero_telefono;work;hobby
+2018-11-01 17:29:25;luca;di bello;2001-10-25;maschio;luca.dibello@samtrevano.ch;arzo;6864;cave di marmo;4;+41765969984;studente;testo sttrano {prova}
+2018-11-01 18:22:04;sadasd;dqasd;2001-02-10;maschio;akjdsjkd@gmami.cokm;sakjd;13223;adasd;13s;0012323232323;askjdksajk;askldsad
+2018-11-01 18:57:25;pinco;pallino;1944-10-29;maschio;pinco.pallino@sunrise.com;parigi;23226;delle castagne marce;6;0041799999999;ricercatrice castagne;
+2018-11-02 15:41:27;test;test;1980-04-10;maschio;test@dummyhost.com;test;12345;testing prova;321d;+341765969985;asdsadads;
+2018-11-02 15:56:28;prova;prova;2001-02-10;maschio;prova@prova.com;ads;1232;asdads;123s;+41765969984;ads;
+2018-11-03 17:33:54;lucà' ciao;ciao-ciao provéàèü;2001-10-25;maschio;luca.dibello@samtrevano.ch;arzo;6864;via cave di marmo;31a;+41765969984;studente;provysaéldkaséldkaàlkf.,msajgéaklsjfésldkjfsédklfjwéelrfjspoifxclkfjsdlkfjs
+2018-11-03 17:35:17;test;test;2001-12-11;maschio;adjk@gmail.com;san-cristo;13343;delle-exception;31a;007654345644544;asdlsalédlakdélak;élkaséldkaséldka
+2018-11-03 18:05:23;luca;di bello;2001-02-10;femmina;lu@lu.co;luca;12123;asdads;123d;0012312312312;asdsa;asasdd

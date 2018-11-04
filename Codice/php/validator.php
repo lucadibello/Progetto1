@@ -14,6 +14,7 @@ $work_length_max = 500;
 //Lunghezza massima per il campo 'hobby'
 $hobby_length_max = 500;
 
+
 /**
  * Questo metodo si occupa della validazione del nome.
  * @param string $name Nome da validare.
@@ -49,7 +50,9 @@ function validate_cognome($cognome){
  */
 function validate_via($via){
     if(strlen($via) > $GLOBALS["global_length_min"] && strlen($via) < $GLOBALS["global_length_max"]){
-        return preg_match('/^[a-z ]+$/i', $via);
+        //THIS REGEX LOOK FOR ILLEGAL CHARACTERS
+        $rexSafety = "/[\^<,\"@\/\{\}\(\)\*\$%\?=>:\|;#0-9]+/i";
+        return !preg_match($rexSafety,$via);
     }
     return false;
 }
@@ -127,7 +130,7 @@ function validate_cap($cap){
  */
 function validate_phone($phone){
     if (strlen($phone) > 0) {
-        return preg_match('/^[+|00]+([0-9]){11}$/',$phone);
+        return preg_match('/^[+|00]+([0-9]){11,13}$/',$phone);
     }
     return false;
 }

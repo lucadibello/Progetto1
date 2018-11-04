@@ -19,7 +19,7 @@
 
     function buildTable(){
         global $csv_utils,$totalUsers;
-        $users_day_path = "../php/data/".$csv_utils->get_current_day_filename();
+        $users_day_path = "../registrazioni/".$csv_utils->get_current_day_filename();
         $users_day = $csv_utils->csv_to_array($users_day_path);
 
         $totalUsers = count($users_day);
@@ -66,7 +66,7 @@
         </header>
         
         <main>
-            <div class="container white z-depth-2" >
+            <div class="col-sm-11" style="padding:10px">
             <table class="responsive-table highlight">
                     <thead>
                         <tr>
