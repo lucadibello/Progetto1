@@ -71,7 +71,7 @@ function validate_dataNascita($data){
             $currentYear = date('Y');
             $postYear = date('Y',strtotime($data));
 
-            if($postYear < $currentYear && $postYear > ($currentYear - 120)){
+            if($postYear <= $currentYear && $postYear >= ($currentYear - 120)){
                 return true;
             }
             else{

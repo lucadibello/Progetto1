@@ -1,8 +1,8 @@
-# Progetto 1 | Diario di lavoro - 26.10.2018
+# Progetto 1 | Diario di lavoro - 27.10.2018
 
 ##### Luca Di Bello
 
-### Canobbio, 26.10.2018
+### Canobbio, 27.10.2018
 
 ## Lavori svolti
 

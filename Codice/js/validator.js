@@ -36,7 +36,7 @@ class validator {
                 //CHECK DATA CONFORMITY
                 var nowDate = new Date();
                 var dateObj = new Date(date);
-                if (dateObj.getFullYear() < nowDate.getFullYear() && dateObj.getFullYear() > (nowDate.getFullYear() - 120)) {
+                if (dateObj.getFullYear() >= (nowDate.getFullYear() - 120) && dateObj.getFullYear() <= nowDate.getFullYear()) {
                     return true;
                 } else {
                     //BORN AFTER CURRENT YEAR OR BORN MORE THEN 120 YEARS AGO
@@ -52,8 +52,12 @@ class validator {
 
     email(email) {
         var re = /^(([^<>()\[\]\\.,:\s@"]+(\.[^<>()\[\]\\.,:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        
+        var notAccents = /[\u00C0-\u017F]/;
         if (email.length > 0) {
-            return re.test(email);
+            if(re.test(email)){
+                return !notAccents.test(email);
+            }
         }
         return false;
     }

@@ -6,6 +6,9 @@
     //Messaggio di errore
     $errorString="";
 
+    //Selezione di default per il sesso
+    $genderSelection = false;
+
     if(isset($_SESSION["registered"])){
         if($_SESSION["registered"] == true){
             header("Location: riassunto.php");
@@ -14,6 +17,9 @@
     
     //REQUEST FROM controllo.php FOR RESTORING FORM DATA
     if($_SERVER["REQUEST_METHOD"] == "POST"){
+        
+        $genderSelection = isset($_POST["sesso"]);
+        
         if(isset($_POST["restore"])){
             //RESTORE REQUEST APPROVED
             if(isset($_SESSION["restore"])){
@@ -104,7 +110,7 @@
                         <div class="input-field col s6">
                             <p style="display:inline-block">
                                 <label>
-                                    <input name="sesso" type="radio" value="m" <?php if($sesso=="Maschio"){echo "checked";} ?> />
+                                    <input name="sesso" type="radio" value="m" <?php if($sesso=="Maschio" || !$genderSelection){echo "checked";} ?> />
                                     <span>Maschio</span>
                                 </label>
                             </p>

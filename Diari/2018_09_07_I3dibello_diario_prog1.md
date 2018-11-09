@@ -1,6 +1,6 @@
-# Progetto 1 | Diario di lavoro - 09.09.2018
+# Progetto 1 | Diario di lavoro - 07.09.2018
 ##### Luca Di Bello
-### Canobbio, 09.09.2018
+### Canobbio, 07.09.2018
 
 ## Lavori svolti
 Abbiamo ricevuto nuovamente una spiegazione sulla documentazione però in modo più dettagliato della scorsa lezione, entrando nei dettagli.

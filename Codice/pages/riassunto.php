@@ -120,7 +120,7 @@
     //LOGOUT REQUEST
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         if(isset($_POST["logout"])){
-            header("Location: register.php");
+            echo "<script>window.location.reload();</script>";
             session_destroy();
         }
     }
